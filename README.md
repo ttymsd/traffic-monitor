@@ -1,5 +1,8 @@
 TrafficMonitor
 
+![License](https://img.shields.io/hexpm/l/plug.svg)
+[ ![Download](https://api.bintray.com/packages/ttymsd/maven/jp.bglb.bonboru%3Atraffic-monitor/images/download.svg) ](https://bintray.com/ttymsd/maven/jp.bglb.bonboru%3Atraffic-monitor/_latestVersion)
+
 # About
 Display traffic per Activity.Observing traffic is used by `TrafficStats` API.
 OkHttp Interceptor observer is implementing.
