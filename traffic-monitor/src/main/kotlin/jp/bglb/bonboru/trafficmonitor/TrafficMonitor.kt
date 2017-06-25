@@ -140,6 +140,10 @@ class TrafficMonitor {
       observer.startObserve()
     }
 
+    fun updatePosition(position: DisplayPosition) {
+        layoutParams.gravity = position.gravity
+    }
+
     fun stop() {
       observer.stopObserve()
       windowManager.removeView(monitor)
@@ -202,6 +206,12 @@ class TrafficMonitor {
 
     @JvmStatic fun snap(name: String) {
       TrafficMonitor.Display.snap(name)
+    }
+
+    @JvmStatic fun updatePosition(position: DisplayPosition) {
+      Display.stop()
+      Display.updatePosition(position)
+      Display.start()
     }
   }
 

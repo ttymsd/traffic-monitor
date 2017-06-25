@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import jp.bglb.bonboru.trafficmonitor.example.R
@@ -39,6 +40,17 @@ class ImageFragment : Fragment() {
 
   var task: AsyncTask<Int, Unit, Int>? = null
 
+  var count = 0;
+
+  val imageView: ImageView? by lazy {
+    view?.findViewById(R.id.image) as ImageView
+  }
+
+  val button: Button? by lazy {
+    view?.findViewById(R.id.update) as Button
+  }
+
+
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
     return inflater?.inflate(R.layout.fragment_image, container, false)
   }
@@ -48,6 +60,20 @@ class ImageFragment : Fragment() {
     val number = arguments.getInt("number")
     task = SleepTask(number)
     task?.execute(0)
+    button?.setOnClickListener {
+      when (count) {
+        0 -> TrafficMonitor.updatePosition(DisplayPosition.TOP_LEFT)
+        1 -> TrafficMonitor.updatePosition(DisplayPosition.TOP_CENTER)
+        2 -> TrafficMonitor.updatePosition(DisplayPosition.TOP_RIGHT)
+        3 -> TrafficMonitor.updatePosition(DisplayPosition.CENTER_LEFT)
+        4 -> TrafficMonitor.updatePosition(DisplayPosition.CENTER)
+        5 -> TrafficMonitor.updatePosition(DisplayPosition.CENTER_RIGHT)
+        6 -> TrafficMonitor.updatePosition(DisplayPosition.BOTTOM_LEFT)
+        7 -> TrafficMonitor.updatePosition(DisplayPosition.BOTTOM_CENTER)
+        else -> TrafficMonitor.updatePosition(DisplayPosition.BOTTOM_RIGHT)
+      }
+      count = (count+1) % 9
+    }
   }
 
   override fun onDetach() {
@@ -63,8 +89,8 @@ class ImageFragment : Fragment() {
     }
 
     override fun onPostExecute(p: Int) {
-      view?.let {
-        Glide.with(it).asBitmap().load("http://placehold.it/500x200?text=$number:$p").into(it as ImageView)
+      imageView?.let {
+        Glide.with(it).asBitmap().load("http://placehold.it/500x200?text=$number:$p").into(it)
         if (p < 10) {
           task = SleepTask(number)
           task?.execute(p + 1)

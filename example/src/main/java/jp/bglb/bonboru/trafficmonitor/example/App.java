@@ -34,7 +34,7 @@ public class App extends Application {
     super.onCreate();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
       if (Settings.canDrawOverlays(this)) {
-        DisplayConfig config = new DisplayConfig(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT, DisplayPosition.BOTTOM_RIGHT);
+        DisplayConfig config = new DisplayConfig(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT, DisplayPosition.BOTTOM_CENTER);
         TrafficMonitor.startMonitoring(this, config);
       }
     } else {
