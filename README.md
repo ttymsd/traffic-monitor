@@ -48,6 +48,7 @@ Implement at in your  `Application` class.
       super.onTerminate()
     }
 ```
+If you want support Android O,you can use WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY flag.
 
 ## snapshot
 observe not per Activity, use `TrafficMonitor.snap`.
